@@ -1,4 +1,5 @@
-import { SITE_NAME } from "@/data";
+import { ShowSearch } from "@/components/shows";
+import { SITE_NAME, shows } from "@/data";
 import { pageMetadata } from "@/lib";
 
 export const metadata = pageMetadata({
@@ -9,5 +10,12 @@ export const metadata = pageMetadata({
 });
 
 export default function HomePage() {
-  return <h1 className="sr-only">{SITE_NAME}</h1>;
+  return (
+    <ShowSearch
+      heading={SITE_NAME}
+      headingHidden
+      label="Search for movies or TV series"
+      shows={shows}
+    />
+  );
 }

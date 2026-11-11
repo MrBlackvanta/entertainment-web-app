@@ -1,4 +1,5 @@
-import { SITE_NAME } from "@/data";
+import { ShowGrid, ShowSearch } from "@/components/shows";
+import { SITE_NAME, tvSeries } from "@/data";
 import { pageMetadata } from "@/lib";
 
 export const metadata = pageMetadata({
@@ -9,5 +10,13 @@ export const metadata = pageMetadata({
 });
 
 export default function TvSeriesPage() {
-  return <h1 className="text-heading md:text-heading-lg">TV Series</h1>;
+  return (
+    <ShowSearch
+      heading="TV Series"
+      label="Search for TV series"
+      shows={tvSeries}
+    >
+      <ShowGrid shows={tvSeries} headingLevel={2} />
+    </ShowSearch>
+  );
 }

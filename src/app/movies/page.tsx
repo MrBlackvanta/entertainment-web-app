@@ -1,4 +1,5 @@
-import { SITE_NAME } from "@/data";
+import { ShowGrid, ShowSearch } from "@/components/shows";
+import { movies, SITE_NAME } from "@/data";
 import { pageMetadata } from "@/lib";
 
 export const metadata = pageMetadata({
@@ -9,5 +10,9 @@ export const metadata = pageMetadata({
 });
 
 export default function MoviesPage() {
-  return <h1 className="text-heading md:text-heading-lg">Movies</h1>;
+  return (
+    <ShowSearch heading="Movies" label="Search for movies" shows={movies}>
+      <ShowGrid shows={movies} headingLevel={2} />
+    </ShowSearch>
+  );
 }
