@@ -8,10 +8,6 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
-export default function Home() {
-  return (
-    <main>
-      <h1>{SITE_NAME}</h1>
-    </main>
-  );
+export default function HomePage() {
+  return <h1 className="sr-only">{SITE_NAME}</h1>;
 }

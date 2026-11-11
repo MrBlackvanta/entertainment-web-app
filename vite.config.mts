@@ -12,5 +12,12 @@ export default defineConfig({
     include: ["src/**/*.test.{ts,tsx}"],
     restoreMocks: true,
   },
-  ...house(),
+  ...house({
+    overrides: [
+      {
+        files: ["src/components/icons/logo.tsx"],
+        rules: { "jsx-a11y/prefer-tag-over-role": "off" },
+      },
+    ],
+  }),
 });
