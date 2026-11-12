@@ -1,5 +1,10 @@
-import { ShowSearch } from "@/components/shows";
-import { SITE_NAME, shows } from "@/data";
+import {
+  ShowGrid,
+  ShowSearch,
+  ShowSection,
+  TrendingRow,
+} from "@/components/shows";
+import { recommendedShows, shows, SITE_NAME, trendingShows } from "@/data";
 import { pageMetadata } from "@/lib";
 
 export const metadata = pageMetadata({
@@ -16,6 +21,13 @@ export default function HomePage() {
       headingHidden
       label="Search for movies or TV series"
       shows={shows}
-    />
+    >
+      <ShowSection heading="Trending" headingClassName="mb-4 md:mb-6.25">
+        <TrendingRow shows={trendingShows} />
+      </ShowSection>
+      <ShowSection heading="Recommended for you" className="mt-4 md:mt-8">
+        <ShowGrid shows={recommendedShows} headingLevel={3} priority />
+      </ShowSection>
+    </ShowSearch>
   );
 }

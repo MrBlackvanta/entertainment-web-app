@@ -1,41 +1,44 @@
 import { PlayIcon } from "@/components/icons";
+import { thumbnailCrops, thumbnailSrc, type ThumbnailVariant } from "@/data";
 
 interface ThumbnailProps {
   slug: string;
+  variant?: ThumbnailVariant;
   loading: "eager" | "lazy";
+  fetchPriority?: "high";
   className?: string;
 }
 
 export default function Thumbnail({
   slug,
+  variant = "regular",
   loading,
+  fetchPriority,
   className = "",
 }: ThumbnailProps) {
-  const folder = `/thumbnails/${slug}/regular`;
+  const { sources, fallback } = thumbnailCrops[variant];
 
   return (
     <div
       className={`group/thumbnail relative overflow-hidden rounded-thumbnail ${className}`}
     >
       <picture>
-        <source
-          media="(min-width: 64rem)"
-          srcSet={`${folder}/large.webp`}
-          width={560}
-          height={348}
-        />
-        <source
-          media="(min-width: 48rem)"
-          srcSet={`${folder}/medium.webp`}
-          width={440}
-          height={280}
-        />
+        {sources.map(({ media, name, width, height }) => (
+          <source
+            key={name}
+            media={media}
+            srcSet={thumbnailSrc(slug, variant, name)}
+            width={width}
+            height={height}
+          />
+        ))}
         <img
-          src={`${folder}/small.webp`}
-          width={328}
-          height={220}
+          src={thumbnailSrc(slug, variant, fallback.name)}
+          width={fallback.width}
+          height={fallback.height}
           alt=""
           loading={loading}
+          fetchPriority={fetchPriority}
           decoding="async"
           className="w-full"
         />

@@ -46,6 +46,19 @@
   --radius-thumbnail: 0.5rem;
   --radius-nav: 0.625rem;
   --radius-nav-lg: 1.25rem;
+
+  --container-page: 90rem;
+}
+
+@utility v-scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-muted) transparent;
+}
+
+@utility v-bleed-right {
+  --bleed: calc(--spacing(9) + max(0px, (100vw - var(--container-page)) / 2));
+  margin-right: calc(var(--bleed) * -1);
+  padding-right: var(--bleed);
 }
 
 @layer base {
@@ -54,7 +67,7 @@
   }
 
   body {
-    @apply bg-page leading-tight font-light text-ink;
+    @apply overflow-x-clip bg-page leading-tight font-light text-ink;
   }
 
   button:not(:disabled) {

@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} antialiased`}>
       <body>
-        <div className="mx-auto flex min-h-dvh max-w-360 flex-col lg:grid lg:grid-cols-[6rem_minmax(0,1fr)] lg:gap-x-9 lg:pt-8 lg:pr-9 lg:pl-8">
+        <div className="mx-auto flex min-h-dvh max-w-page flex-col lg:grid lg:grid-cols-[6rem_minmax(0,1fr)] lg:gap-x-9 lg:pt-8 lg:pr-9 lg:pl-8">
           <AppHeader />
           <div className="relative grow">
             <main className="px-4 pt-6 pb-15 md:px-6 md:pt-8 md:pb-14 lg:px-0 lg:pb-13">

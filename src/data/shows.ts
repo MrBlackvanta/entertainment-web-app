@@ -267,3 +267,7 @@ export const shows: readonly Show[] = [
 export const movies = shows.filter((show) => show.category === "Movie");
 
 export const tvSeries = shows.filter((show) => show.category === "TV Series");
+
+export const trendingShows = shows.filter((show) => show.isTrending);
+
+export const recommendedShows = shows.filter((show) => !show.isTrending);
