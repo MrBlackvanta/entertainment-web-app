@@ -16,7 +16,7 @@ export default function TvSeriesPage() {
       label="Search for TV series"
       shows={tvSeries}
     >
-      <ShowGrid shows={tvSeries} headingLevel={2} />
+      <ShowGrid shows={tvSeries} headingLevel={2} priority />
     </ShowSearch>
   );
 }

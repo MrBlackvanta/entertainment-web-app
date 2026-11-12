@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function MoviesPage() {
   return (
     <ShowSearch heading="Movies" label="Search for movies" shows={movies}>
-      <ShowGrid shows={movies} headingLevel={2} />
+      <ShowGrid shows={movies} headingLevel={2} priority />
     </ShowSearch>
   );
 }

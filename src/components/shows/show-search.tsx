@@ -33,7 +33,7 @@ export default function ShowSearch({
         className={
           headingHidden || searching
             ? "sr-only"
-            : "text-heading md:text-heading-lg"
+            : "mb-6 text-heading md:text-heading-lg lg:mb-8"
         }
       >
         {heading}
@@ -58,7 +58,10 @@ export default function ShowSearch({
       </search>
       <div aria-live="polite" aria-atomic="true">
         {searching && (
-          <h2 id={resultsHeadingId} className="text-heading md:text-heading-lg">
+          <h2
+            id={resultsHeadingId}
+            className="mb-6 text-heading md:text-heading-lg lg:mb-8"
+          >
             {resultsHeading(results.length, query)}
           </h2>
         )}
