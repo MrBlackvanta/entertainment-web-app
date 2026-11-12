@@ -177,6 +177,8 @@ describe("BookmarkedPage", () => {
   it.each([
     ["unreadable", "{"],
     ["not a list", '{"beyond-earth":true}'],
+    ["null", "null"],
+    ["a bare string", '"dogs"'],
   ])(
     "keeps the catalogue's bookmarks when saved data is %s",
     async (_, saved) => {
@@ -194,6 +196,24 @@ describe("BookmarkedPage", () => {
       );
     },
   );
+
+  it("ignores saved entries that are not shows", async () => {
+    localStorage.setItem(
+      BOOKMARKS_STORAGE_KEY,
+      JSON.stringify([null, 1, {}, "dogs", "no-such-show"]),
+    );
+    const container = await prerender();
+    runInlineScripts(container);
+
+    const { consoleError, onRecoverableError } = await hydrate(container);
+
+    expect(onRecoverableError).not.toHaveBeenCalled();
+    expect(consoleError).not.toHaveBeenCalled();
+    expect(
+      within(section("Bookmarked Movies")).queryByRole("list"),
+    ).not.toBeInTheDocument();
+    expect(visibleTitles("Bookmarked TV Series")).toEqual(["Dogs"]);
+  });
 
   it("loads the first four thumbnails a first visit paints eagerly", async () => {
     const container = await prerender();
