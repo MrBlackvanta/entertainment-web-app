@@ -5,7 +5,7 @@ const shareImage = {
   url: "/opengraph-image.jpg",
   width: 1200,
   height: 630,
-  alt: "The Matinee clapperboard beside a grid of movie and TV series thumbnails.",
+  alt: "Matinee, beside the app's trending row and grid of movie and TV series thumbnails.",
 };
 
 export const openGraphBase = {
