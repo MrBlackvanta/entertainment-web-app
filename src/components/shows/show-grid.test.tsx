@@ -1,5 +1,6 @@
 import { movies } from "@/data";
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vite-plus/test";
 import ShowGrid from "./show-grid";
 
@@ -44,6 +45,17 @@ describe("ShowGrid", () => {
     expect(
       within(card).getByText("Play").closest('[aria-hidden="true"]'),
     ).not.toBeNull();
+  });
+
+  it("keeps focus on a bookmark whose card stays listed", async () => {
+    const user = userEvent.setup();
+    render(<ShowGrid shows={firstSix} headingLevel={2} />);
+    const toggle = screen.getByRole("button", { name: "Bookmark Bottom Gear" });
+
+    await user.click(toggle);
+
+    expect(toggle).toHaveAttribute("aria-pressed", "true");
+    expect(toggle).toHaveFocus();
   });
 
   it("art-directs the show's own crop at each breakpoint", () => {

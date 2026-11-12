@@ -19,6 +19,7 @@ export default function ShowSection({
     <section aria-labelledby={headingId} className={className}>
       <h2
         id={headingId}
+        tabIndex={-1}
         className={`text-heading md:text-heading-lg ${headingClassName}`}
       >
         {heading}

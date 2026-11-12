@@ -60,6 +60,7 @@ export default function ShowSearch({
         {searching && (
           <h2
             id={resultsHeadingId}
+            tabIndex={-1}
             className="mb-6 text-heading md:text-heading-lg lg:mb-8"
           >
             {resultsHeading(results.length, query)}

@@ -2,6 +2,7 @@
 
 import { BOOKMARKS_STORAGE_KEY, shows } from "@/data";
 import { useSyncExternalStore } from "react";
+import { readPrepaintedBookmarks } from "./bookmarks-prepaint";
 
 type Bookmarks = ReadonlySet<string>;
 
@@ -12,19 +13,23 @@ const seededBookmarks: Bookmarks = new Set(
 const showSlugs = new Set(shows.map((show) => show.slug));
 const listeners = new Set<() => void>();
 let current: Bookmarks | undefined;
+let firstPaint: Bookmarks | undefined;
 
 function isShowSlug(value: unknown): value is string {
   return typeof value === "string" && showSlugs.has(value);
 }
 
+function toBookmarks(saved: unknown): Bookmarks | undefined {
+  return Array.isArray(saved) ? new Set(saved.filter(isShowSlug)) : undefined;
+}
+
 function readStoredBookmarks(): Bookmarks {
   try {
-    const stored: unknown = JSON.parse(
-      localStorage.getItem(BOOKMARKS_STORAGE_KEY) ?? "null",
+    return (
+      toBookmarks(
+        JSON.parse(localStorage.getItem(BOOKMARKS_STORAGE_KEY) ?? "null"),
+      ) ?? seededBookmarks
     );
-    return Array.isArray(stored)
-      ? new Set(stored.filter(isShowSlug))
-      : seededBookmarks;
   } catch {
     return seededBookmarks;
   }
@@ -33,6 +38,11 @@ function readStoredBookmarks(): Bookmarks {
 function getBookmarks() {
   current ??= readStoredBookmarks();
   return current;
+}
+
+function getFirstPaintBookmarks() {
+  firstPaint ??= toBookmarks(readPrepaintedBookmarks()) ?? seededBookmarks;
+  return firstPaint;
 }
 
 function notify() {
@@ -67,10 +77,14 @@ export function toggleBookmark(slug: string) {
   notify();
 }
 
+export function useBookmarks() {
+  return useSyncExternalStore(subscribe, getBookmarks, getFirstPaintBookmarks);
+}
+
 export function useIsBookmarked(slug: string) {
   return useSyncExternalStore(
     subscribe,
     () => getBookmarks().has(slug),
-    () => seededBookmarks.has(slug),
+    () => getFirstPaintBookmarks().has(slug),
   );
 }

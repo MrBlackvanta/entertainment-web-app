@@ -1,5 +1,10 @@
 import { SITE_NAME } from "@/data";
-import { pageMetadata } from "@/lib";
+import {
+  BOOKMARKS_PREPAINT_SCRIPT,
+  BOOKMARKS_PREPAINT_SCRIPT_ID,
+  pageMetadata,
+} from "@/lib";
+import { BookmarkedShows } from "@/views/bookmarked";
 
 export const metadata = pageMetadata({
   title: `${SITE_NAME} | Bookmarks`,
@@ -9,5 +14,18 @@ export const metadata = pageMetadata({
 });
 
 export default function BookmarkedPage() {
-  return <h1 className="sr-only">Bookmarks</h1>;
+  return (
+    <>
+      <link
+        rel="expect"
+        href={`#${BOOKMARKS_PREPAINT_SCRIPT_ID}`}
+        blocking="render"
+      />
+      <BookmarkedShows />
+      <script
+        id={BOOKMARKS_PREPAINT_SCRIPT_ID}
+        dangerouslySetInnerHTML={{ __html: BOOKMARKS_PREPAINT_SCRIPT }}
+      />
+    </>
+  );
 }
