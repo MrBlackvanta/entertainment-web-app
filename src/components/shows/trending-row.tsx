@@ -9,7 +9,7 @@ interface TrendingRowProps {
 
 export default function TrendingRow({ shows }: TrendingRowProps) {
   return (
-    <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 v-scrollbar-thin gap-4 overflow-x-auto px-4 pb-2 md:-mx-6 md:scroll-px-6 md:gap-10 md:px-6 lg:v-bleed-right lg:ml-0 lg:scroll-pl-0 lg:pl-0">
+    <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 v-scrollbar-thin gap-4 overflow-x-auto px-4 pb-2 md:-mx-6 md:scroll-px-6 md:gap-10 md:px-6 lg:-mr-9 lg:ml-0 lg:scroll-pl-0 lg:pr-9 lg:pl-0">
       {shows.map((show, index) => (
         <li key={show.slug} className="w-60 shrink-0 snap-start md:w-117.5">
           <TrendingCard

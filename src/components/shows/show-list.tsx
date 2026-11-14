@@ -7,7 +7,7 @@ export default function ShowList({
   return (
     <ul
       {...props}
-      className={`grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-x-7 md:gap-y-6 lg:gap-x-10 lg:gap-y-8 xl:grid-cols-4 ${className}`}
+      className={`grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-x-7 md:gap-y-6 lg:gap-x-10 lg:gap-y-8 xl:grid-cols-4 2xl:grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] ${className}`}
     />
   );
 }

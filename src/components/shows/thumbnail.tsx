@@ -45,9 +45,9 @@ export default function Thumbnail({
       </picture>
       <div
         aria-hidden="true"
-        className="absolute inset-0 hidden place-items-center bg-scrim/75 group-hover/thumbnail:grid"
+        className="absolute inset-0 grid place-items-center bg-scrim/75 opacity-0 group-hover/thumbnail:opacity-100 motion-safe:transition-opacity motion-safe:duration-300"
       >
-        <span className="flex h-12 items-center gap-5 rounded-full bg-ink/25 pr-6 pl-2 text-card-title-lg">
+        <span className="flex h-12 scale-90 items-center gap-5 rounded-full bg-ink/25 pr-6 pl-2 text-card-title-lg group-hover/thumbnail:scale-100 motion-safe:transition-transform motion-safe:duration-300">
           <PlayIcon className="size-7.5" />
           Play
         </span>
